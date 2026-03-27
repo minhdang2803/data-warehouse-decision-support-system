@@ -1,5 +1,5 @@
 -- 1. Tạo bảng Dimension: dim_date
-IF OBJECT_ID('dim_date', 'U') IS NOT NULL DROP TABLE dim_date;
+DROP TABLE IF EXISTS dim_date;
 CREATE TABLE dim_date (
     date_key INT PRIMARY KEY,       -- Ví dụ: 20170801
     full_date DATE,                 -- Ví dụ: 2017-08-01
@@ -10,13 +10,13 @@ CREATE TABLE dim_date (
     day INT,                        -- Ngày trong tháng (DD)
     week_no INT,                    -- Tuần thứ mấy trong năm
     yyyymm VARCHAR(6),              -- Mã năm tháng (YYYYMM)
-    mtd_flag BIT,                   -- Cờ MTD
+    mtd_flag BOOLEAN,               -- Cờ MTD
     day_of_week VARCHAR(20),        -- Thứ trong tuần (Monday, Tuesday...)
-    is_weekend BIT                  -- Cờ báo cuối tuần (0 - trong tuần/1 - cuối tuần)
+    is_weekend BOOLEAN              -- Cờ báo cuối tuần (0 - trong tuần/1 - cuối tuần)
 );
 
 -- 2. Tạo bảng Dimension: dim_customer
-IF OBJECT_ID('dim_customer', 'U') IS NOT NULL DROP TABLE dim_customer;
+DROP TABLE IF EXISTS dim_customer;
 CREATE TABLE dim_customer (
     customer_key VARCHAR(50) PRIMARY KEY, -- Maps to customer_id
     customer_unique_id VARCHAR(50),      
@@ -26,7 +26,7 @@ CREATE TABLE dim_customer (
 );
 
 -- 3. Tạo bảng Dimension: dim_product
-IF OBJECT_ID('dim_product', 'U') IS NOT NULL DROP TABLE dim_product;
+DROP TABLE IF EXISTS dim_product;
 CREATE TABLE dim_product (
     product_key VARCHAR(50) PRIMARY KEY, -- Maps to product_id
     category_name VARCHAR(100),
@@ -38,9 +38,9 @@ CREATE TABLE dim_product (
 );
 
 -- 4. Tạo bảng Fact: fact_sales
-IF OBJECT_ID('fact_sales', 'U') IS NOT NULL DROP TABLE fact_sales;
+DROP TABLE IF EXISTS fact_sales;
 CREATE TABLE fact_sales (
-    fact_id INT IDENTITY(1,1) PRIMARY KEY, 
+    fact_id INT PRIMARY KEY AUTO_INCREMENT, 
     date_key INT,                          -- Ngày mua (FK)
     delivered_date_key INT,                -- Ngày giao hàng 
     order_id VARCHAR(50),                  -- Mã đơn hàng
@@ -57,36 +57,33 @@ CREATE TABLE fact_sales (
 );
 
 -- 5. Đổ dữ liệu vào bảng dim_date
-INSERT INTO dim_date (
+-- MySQL sử dụng DATE_FORMAT, YEAR, MONTH, DAY, QUARTER...
+INSERT IGNORE INTO dim_date (
     date_key, full_date, year, quarter, month, month_name,
     day, week_no, yyyymm, mtd_flag,
     day_of_week, is_weekend
 )
 SELECT DISTINCT 
-    CAST(FORMAT(order_purchase_timestamp, 'yyyyMMdd') AS INT) as date_key,
-    CAST(order_purchase_timestamp AS DATE) as full_date,
+    CAST(DATE_FORMAT(order_purchase_timestamp, '%Y%m%d') AS UNSIGNED) as date_key,
+    DATE(order_purchase_timestamp) as full_date,
     YEAR(order_purchase_timestamp) as year,
-    'Q' + CAST(DATEPART(QUARTER, order_purchase_timestamp) AS VARCHAR(1)) as quarter,
+    CONCAT('Q', QUARTER(order_purchase_timestamp)) as quarter,
     MONTH(order_purchase_timestamp) as month,
-    DATENAME(MONTH, order_purchase_timestamp) as month_name,
+    DATE_FORMAT(order_purchase_timestamp, '%M') as month_name,
     DAY(order_purchase_timestamp) as day,
-    DATEPART(ISO_WEEK, order_purchase_timestamp) as week_no,
-    FORMAT(order_purchase_timestamp, 'yyyyMM') as yyyymm,
+    WEEK(order_purchase_timestamp, 1) as week_no,
+    DATE_FORMAT(order_purchase_timestamp, '%Y%m') as yyyymm,
     1 as mtd_flag,
-    DATENAME(WEEKDAY, order_purchase_timestamp) as day_of_week,
+    DAYNAME(order_purchase_timestamp) as day_of_week,
     CASE 
-        WHEN (DATEPART(weekday, order_purchase_timestamp) + @@DATEFIRST - 1) % 7 IN (0, 6) THEN 1 
+        WHEN DAYOFWEEK(order_purchase_timestamp) IN (1, 7) THEN 1 
         ELSE 0 
     END as is_weekend
 FROM olist_orders_dataset
-WHERE order_purchase_timestamp IS NOT NULL
-AND NOT EXISTS (
-    SELECT 1 FROM dim_date d 
-    WHERE d.date_key = CAST(FORMAT(order_purchase_timestamp, 'yyyyMMdd') AS INT)
-);
+WHERE order_purchase_timestamp IS NOT NULL;
 
 -- 6. Đổ dữ liệu vào bảng dim_customer
-INSERT INTO dim_customer (
+INSERT IGNORE INTO dim_customer (
     customer_key, customer_unique_id, 
     customer_zip_code_prefix, customer_city, customer_state
 )
@@ -96,14 +93,10 @@ SELECT DISTINCT
     customer_zip_code_prefix,
     customer_city,
     customer_state
-FROM olist_customers_dataset
-WHERE NOT EXISTS (
-    SELECT 1 FROM dim_customer d 
-    WHERE d.customer_key = olist_customers_dataset.customer_id
-);
+FROM olist_customers_dataset;
 
 -- 7. Đổ dữ liệu vào bảng dim_product
-INSERT INTO dim_product (
+INSERT IGNORE INTO dim_product (
     product_key, category_name, category_name_english,
     weight_g, length_cm, height_cm, width_cm
 )
@@ -117,34 +110,36 @@ SELECT DISTINCT
     p.product_width_cm
 FROM olist_products_dataset p
 LEFT JOIN product_category_name_translation t 
-    ON p.product_category_name = t.product_category_name
-WHERE NOT EXISTS (
-    SELECT 1 FROM dim_product d 
-    WHERE d.product_key = p.product_id
-);
+    ON p.product_category_name = t.product_category_name;
 
 
--- 8. Đổ dữ liệu vào bảng fact_sales
+-- 8. Đổ dữ liệu vào bảng fact_sales (Lưu ý: product_id tr mapped vào product_key)
 INSERT INTO fact_sales (
     date_key, order_id, order_status, product_key, quantity, 
     delivered_date_key, unit_price, revenue,
     customer_key 
 )
 SELECT 
-    CAST(FORMAT(t1.order_purchase_timestamp, 'yyyyMMdd') AS INT) as date_key,
+    CAST(DATE_FORMAT(t1.order_purchase_timestamp, '%Y%m%d') AS UNSIGNED) as date_key,
     t1.order_id,
     t1.order_status,
     t2.product_id, -- product_key
     1 as quantity,
     
+    -- delivered_date_key
     CASE 
         WHEN t1.order_delivered_customer_date IS NOT NULL 
-        THEN CAST(FORMAT(t1.order_delivered_customer_date, 'yyyyMMdd') AS INT)
+        THEN CAST(DATE_FORMAT(t1.order_delivered_customer_date, '%Y%m%d') AS UNSIGNED)
         ELSE NULL 
     END AS delivered_date_key,
     
+    -- unit_price
     t2.price,
+    
+    -- revenue = (price + freight) * qty
     (t2.price + t2.freight_value) * 1 as revenue,
+
+    -- customer_key
     t1.customer_id
 
 FROM olist_orders_dataset t1
@@ -181,9 +176,9 @@ SELECT
     current_year.quarter,
     current_year.revenue AS revenue_this_year,
     last_year.revenue AS revenue_last_year,
-    CAST(ROUND(
+    CONCAT(ROUND(
         (current_year.revenue - last_year.revenue) / NULLIF(last_year.revenue, 0) * 100
-    , 2) AS VARCHAR(10)) + '%' AS yoy_growth_percent
+    , 2), '%') AS yoy_growth_percent
 FROM monthly_sales current_year
 LEFT JOIN monthly_sales last_year 
     ON current_year.year = last_year.year + 1 
@@ -191,6 +186,7 @@ LEFT JOIN monthly_sales last_year
 ORDER BY current_year.year, current_year.month;
 
 -- 11. Roll-up & Drill-down
+-- Drill-down Level 1: Xem chi tiết từng tháng của năm 2017
 SELECT 
     d.month,
     d.month_name,
@@ -237,30 +233,33 @@ SELECT
     ) AS daily_growth_percent
 FROM fact_sales f
 JOIN dim_date d ON f.date_key = d.date_key
-WHERE d.full_date BETWEEN DATEADD(day, -7, '2018-05-01') AND '2018-05-01'
+-- MySQL DATE_SUB
+WHERE d.full_date BETWEEN DATE_SUB('2018-05-01', INTERVAL 7 DAY) AND '2018-05-01'
 GROUP BY d.full_date
 ORDER BY d.full_date DESC;
 
 -- 14. Kịch bản 2: Cảnh báo "Điểm nghẽn" Vận hành (Bottleneck Alert)
-SELECT TOP 20
+SELECT 
     f.order_id,
     d.full_date AS order_date,
     f.order_status,
-    DATEDIFF(day, d.full_date, '2018-05-01') AS days_pending
+    DATEDIFF('2018-05-01', d.full_date) AS days_pending
 FROM fact_sales f
 JOIN dim_date d ON f.date_key = d.date_key
 WHERE f.order_status IN ('processing', 'invoiced', 'shipped') 
-  AND DATEDIFF(day, d.full_date, '2018-05-01') > 10 
-ORDER BY days_pending DESC;
+  AND DATEDIFF('2018-05-01', d.full_date) > 10 
+ORDER BY days_pending DESC
+LIMIT 20;
 
 -- 15. Kịch bản 3: Top Sản phẩm "Hot Trend" tuần này
-SELECT TOP 10
+SELECT 
     p.category_name,
     SUM(f.quantity) AS units_sold_this_week,
     SUM(f.revenue) AS revenue_this_week
 FROM fact_sales f
 JOIN dim_date d ON f.date_key = d.date_key
 JOIN dim_product p ON f.product_key = p.product_key
-WHERE d.full_date BETWEEN DATEADD(day, -7, '2018-05-01') AND '2018-05-01'
+WHERE d.full_date BETWEEN DATE_SUB('2018-05-01', INTERVAL 7 DAY) AND '2018-05-01'
 GROUP BY p.category_name
-ORDER BY units_sold_this_week DESC;
+ORDER BY units_sold_this_week DESC
+LIMIT 10;

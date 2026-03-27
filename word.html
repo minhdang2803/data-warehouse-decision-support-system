@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuyết trình Triết học - Thực trạng LLSX và QHSX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #c5a059;
+            --accent: #d32f2f;
+            --bg: #f4f7f6;
+            --text-dark: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; background-color: #cbd5e0; display: flex; flex-direction: column; align-items: center; padding: 40px 0; gap: 40px; }
+
+        .slide {
+            width: 1200px; height: 675px;
+            background: var(--white);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .slide::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: var(--primary); }
+        .slide-header { border-bottom: 3px solid var(--secondary); padding-bottom: 15px; margin-bottom: 20px; }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; margin: 0; text-transform: uppercase; }
+        h1 { font-size: 48px; color: var(--secondary); }
+        h2 { font-size: 30px; color: var(--primary); }
+        h3 { font-size: 22px; color: var(--primary); margin-bottom: 12px; }
+        h4 { font-size: 19px; color: var(--secondary); margin-bottom: 8px; }
+
+        .content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+        ul { padding-left: 15px; }
+        li { font-size: 18px; line-height: 1.5; color: var(--text-dark); margin-bottom: 8px; }
+        b { color: var(--primary); }
+
+        .image-box { width: 100%; height: 320px; background: #eee; border-radius: 8px; overflow: hidden; position: relative; }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .tag { background: var(--primary); color: var(--white); padding: 5px 15px; border-radius: 4px; font-size: 14px; font-weight: 700; margin-bottom: 10px; display: inline-block; }
+        .footer { position: absolute; bottom: 25px; right: 60px; font-size: 14px; color: #777; font-weight: 700; }
+
+        .section-break-slide { background: var(--primary); color: var(--white); text-align: center; justify-content: center; }
+        .section-break-slide h2 { color: var(--secondary); font-size: 40px; line-height: 1.3; }
+        .section-break-slide .divider { width: 80px; height: 4px; background: var(--white); margin: 30px auto; }
+
+        .card { padding: 20px; border-radius: 8px; border: 1px solid #ddd; height: 100%; }
+        .highlight-blue { border-left: 8px solid var(--primary); background: #ebf8ff; }
+        .title-slide { background: var(--primary); color: var(--white); text-align: center; justify-content: center; }
+        .title-slide h1 { color: var(--secondary); font-size: 56px; }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: TRANG BÌA -->
+    <div class="slide title-slide">
+        <p>BÀI THUYẾT TRÌNH MÔN TRIẾT HỌC MÁC - LÊNIN</p>
+        <h1>THỰC TRẠNG LLSX VÀ QHSX TẠI VIỆT NAM HIỆN NAY</h1>
+        <div style="width: 100px; height: 4px; background: var(--secondary); margin: 30px auto;"></div>
+        <p>Thời kỳ quá độ lên Chủ nghĩa xã hội</p>
+    </div>
+
+    <!-- SLIDE 2: MỤC LỤC -->
+    <div class="slide">
+        <div class="slide-header"><h2>CẤU TRÚC NỘI DUNG</h2></div>
+        <div class="content">
+            <div class="grid-2">
+                <div>
+                    <h3 style="color:var(--secondary)">2.1. Lực lượng sản xuất (LLSX)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><b>2.1.1.</b> Tính chất và trình độ LLSX</li>
+                        <li><b>2.1.2.</b> Sự thay đổi của LLSX trong TKQĐ</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color:var(--secondary)">2.2. Quan hệ sản xuất (QHSX)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><b>2.2.1.</b> Tính phù hợp/không phù hợp của QHSX</li>
+                        <li><b>2.2.2.</b> Sự thay đổi của QHSX trong TKQĐ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">Trang 02</div>
+    </div>
+
+    <!-- SLIDE 3: TIÊU ĐỀ RIÊNG 2.1 -->
+    <div class="slide section-break-slide">
+        <p style="letter-spacing: 2px;">PHẦN THỨ NHẤT</p>
+        <h2>2.1. Thực trạng của lực lượng sản xuất trong thời kỳ quá độ lên CNXH ở Việt Nam hiện nay</h2>
+        <div class="divider"></div>
+    </div>
+
+    <!-- SLIDE 4: NỘI DUNG 2.1 TỔNG QUAN -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.1</span>
+            <h2>Trạng thái "Vận động kép" của LLSX</h2>
+        </div>
+        <div class="content">
+            <div class="grid-2">
+                <div>
+                    <h3>Đặc trưng vận động</h3>
+                    <ul>
+                        <li><b>Hiện đại hóa:</b> Chuyển dịch từ sản xuất nông nghiệp lạc hậu sang công nghiệp hiện đại.</li>
+                        <li><b>Chuyển đổi số:</b> Thích ứng mạnh mẽ với kinh tế nền tảng (Grab, Shopee) và quản trị số.</li>
+                        <li><b>Tính đan xen:</b> Sự tồn tại song song giữa nông nghiệp truyền thống và công nghệ 4.0.</li>
+                    </ul>
+                </div>
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Công nghiệp hiện đại">
+                </div>
+            </div>
+        </div>
+        <div class="footer">Trang 04</div>
+    </div>
+
+    <!-- SLIDE 5: TIÊU ĐỀ RIÊNG 2.1.1 -->
+    <div class="slide section-break-slide">
+        <p>MỤC NHỎ</p>
+        <h2>2.1.1. Tính chất và trình độ của lực lượng sản xuất</h2>
+        <div class="divider"></div>
+    </div>
+
+    <!-- SLIDE 6: NỘI DUNG 2.1.1 TÍNH CHẤT (ĐÃ LÀM GIÀU) -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.1.1</span>
+            <h2>Tính chất của Lực lượng sản xuất</h2>
+        </div>
+        <div class="content">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                <div class="card" style="background:#f8fafc; border-top: 5px solid #718096;">
+                    <h4>1. Tính chất cá nhân</h4>
+                    <p style="font-size: 14px;">Giai đoạn sản xuất nhỏ, hộ gia đình manh mún. Tự đảm đương nhiều khâu, trình độ tổ chức thấp.</p>
+                </div>
+                <div class="card" style="background:#f8fafc; border-top: 5px solid var(--secondary);">
+                    <h4>2. Hợp tác sơ khai</h4>
+                    <p style="font-size: 14px;">Nhiều lao động phối hợp trong tổ đổi công, HTX kiểu cũ. Năng suất tăng nhờ sự hiệp tác trực tiếp.</p>
+                </div>
+                <div class="card highlight-blue" style="border-top: 5px solid var(--primary);">
+                    <h4>3. Xã hội hóa cao độ</h4>
+                    <p style="font-size: 14px;">Sản xuất dây chuyền, chuỗi giá trị toàn cầu. Khoa học trở thành <b>LLSX trực tiếp</b>.</p>
+                </div>
+            </div>
+            <div class="highlight-blue card" style="margin-top: 15px; padding: 15px 25px;">
+                <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fa-solid fa-arrows-to-circle"></i> Biểu hiện tại Việt Nam:</h4>
+                <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin: 0; padding-left: 20px;">
+                    <li style="font-size: 15px; margin-bottom: 5px;">Cánh đồng mẫu lớn trong nông nghiệp.</li>
+                    <li style="font-size: 15px; margin-bottom: 5px;">Khu công nghiệp tập trung quy mô lớn.</li>
+                    <li style="font-size: 15px; margin-bottom: 5px;">Hệ sinh thái kinh tế số (Grab, Shopee).</li>
+                    <li style="font-size: 15px; margin-bottom: 5px;">Chuyển dịch lao động sang khu vực chính thức.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer">Trang 06</div>
+    </div>
+
+    <!-- SLIDE 7: NỘI DUNG 2.1.1 TRÌNH ĐỘ -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.1.1</span>
+            <h2>Trình độ của Lực lượng sản xuất</h2>
+        </div>
+        <div class="content">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-gear" style="font-size: 30px; color: var(--primary);"></i>
+                    <p style="font-size: 15px; margin-top: 10px;"><b>Công cụ</b><br>Tự động hóa, AI.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-user-graduate" style="font-size: 30px; color: var(--primary);"></i>
+                    <p style="font-size: 15px; margin-top: 10px;"><b>Con người</b><br>Trí tuệ hóa.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-sitemap" style="font-size: 30px; color: var(--primary);"></i>
+                    <p style="font-size: 15px; margin-top: 10px;"><b>Tổ chức</b><br>Quản trị khoa học.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-flask" style="font-size: 30px; color: var(--primary);"></i>
+                    <p style="font-size: 15px; margin-top: 10px;"><b>Khoa học</b><br>Lực lượng trực tiếp.</p>
+                </div>
+            </div>
+            <div class="image-box" style="height: 250px; margin-top: 20px;">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Technology">
+            </div>
+        </div>
+        <div class="footer">Trang 07</div>
+    </div>
+
+    <!-- SLIDE 8: TIÊU ĐỀ RIÊNG 2.1.2 -->
+    <div class="slide section-break-slide">
+        <p>MỤC NHỎ</p>
+        <h2>2.1.2 Sự thay đổi của lực lượng sản xuất trong TKQĐ lên CNXH ở Việt Nam hiện nay</h2>
+        <div class="divider"></div>
+    </div>
+
+    <!-- SLIDE 9: NỘI DUNG 2.1.2 P1 -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.1.2</span>
+            <h2>Khoa học & Tư liệu sản xuất hiện đại</h2>
+        </div>
+        <div class="content">
+            <div class="grid-2">
+                <div>
+                    <h3>Biến đổi về chất</h3>
+                    <ul>
+                        <li><b>KH-CN:</b> Trở thành lực lượng trực tiếp quyết định chiều sâu sản xuất.</li>
+                        <li><b>Công nghệ số:</b> Tri thức là yếu tố mang tính quyết định cạnh tranh.</li>
+                        <li><b>Số hóa TSX:</b> Thay thế công cụ thủ công bằng dây chuyền tự động hóa.</li>
+                    </ul>
+                </div>
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Digital Economy">
+                </div>
+            </div>
+        </div>
+        <div class="footer">Trang 09</div>
+    </div>
+
+    <!-- SLIDE 10: NỘI DUNG 2.1.2 P2 -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.1.2</span>
+            <h2>Nguồn nhân lực chất lượng cao</h2>
+        </div>
+        <div class="content">
+            <div class="card highlight-blue">
+                <h3>Nhân tố then chốt</h3>
+                <p style="font-size: 20px;">Người lao động từ người dùng đơn thuần trở thành <b>chủ thể sáng tạo</b>, vận hành các hệ thống phức tạp.</p>
+            </div>
+            <div class="grid-2" style="margin-top: 20px;">
+                <div>
+                    <ul>
+                        <li>Yêu cầu cao về tư duy sáng tạo và kỹ năng nghề nghiệp.</li>
+                        <li>Nhiệm vụ: Phát triển giáo dục và đội ngũ trí thức lâu dài.</li>
+                    </ul>
+                </div>
+                <div class="image-box" style="height: 180px;">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Workforce">
+                </div>
+            </div>
+        </div>
+        <div class="footer">Trang 10</div>
+    </div>
+
+    <!-- SLIDE 11: NỘI DUNG 2.1.2 P3 (ĐÃ LÀM GIÀU) -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.1.2</span>
+            <h2>Chiến lược "Đi tắt, đón đầu" & Mục tiêu</h2>
+        </div>
+        <div class="content">
+            <div class="grid-2">
+                <div class="card">
+                    <h4>1. Mục tiêu chiến lược</h4>
+                    <p style="font-size: 16px;">Xây dựng nền kinh tế hiện đại dựa trên tri thức, hội nhập sâu rộng toàn cầu.</p>
+                    <h4 style="margin-top: 15px;">2. Chuyển dịch cơ cấu</h4>
+                    <p style="font-size: 16px;">Ưu tiên công nghệ cao, thay thế dần thâm dụng lao động giá rẻ.</p>
+                </div>
+                <div class="card highlight-blue">
+                    <h4>3. Chiến lược "Rút ngắn"</h4>
+                    <p style="font-size: 16px;">Tận dụng CMCN 4.0 để bỏ qua các giai đoạn trung gian lạc hậu.</p>
+                    <h4 style="margin-top: 15px;">4. Bối cảnh Quá độ</h4>
+                    <p style="font-size: 16px;">Thực hiện trong mô hình KTTT định hướng XHCN vì mục tiêu con người.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">Trang 11</div>
+    </div>
+
+    <!-- SLIDE 12: TIÊU ĐỀ RIÊNG 2.2 -->
+    <div class="slide section-break-slide">
+        <p style="letter-spacing: 2px;">PHẦN THỨ HAI</p>
+        <h2>2.2 Thực trạng của quan hệ sản xuất trong thời kỳ quá độ lên chủ nghĩa xã hội hiện nay</h2>
+        <div class="divider"></div>
+    </div>
+
+    <!-- SLIDE 13: NỘI DUNG 2.2 TỔNG QUAN -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.2</span>
+            <h2>Thực trạng Quan hệ sản xuất (QHSX)</h2>
+        </div>
+        <div class="content">
+            <div class="grid-2">
+                <div>
+                    <h3>Cải biến sâu sắc</h3>
+                    <ul>
+                        <li>Biến đổi trên cả 3 mặt: <b>Sở hữu - Quản lý - Phân phối</b>.</li>
+                        <li>Xây dựng hệ thống QHSX tiến bộ, phù hợp với LLSX hiện đại.</li>
+                        <li>Vận dụng đúng đắn quy luật biện chứng vào thực tiễn Việt Nam.</li>
+                    </ul>
+                </div>
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Governance">
+                </div>
+            </div>
+        </div>
+        <div class="footer">Trang 13</div>
+    </div>
+
+    <!-- SLIDE 14: TIÊU ĐỀ RIÊNG 2.2.1 -->
+    <div class="slide section-break-slide">
+        <p>MỤC NHỎ</p>
+        <h2>2.2.1. Tính chất phù hợp hoặc không phù hợp của QHSX với trình độ phát triển của LLSX</h2>
+        <div class="divider"></div>
+    </div>
+
+    <!-- SLIDE 15: NỘI DUNG 2.2.1 (BỔ SUNG KẾT LUẬN) -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.2.1</span>
+            <h2>Sự phù hợp và Mâu thuẫn của QHSX</h2>
+        </div>
+        <div class="content">
+            <div class="grid-2">
+                <div class="card" style="background:#f0fff4; border-top: 5px solid #38a169;">
+                    <h4 style="color:#276749;">Ý nghĩa sự phù hợp</h4>
+                    <ul style="font-size: 15px;">
+                        <li>Giải phóng sức sản xuất sau thời kỳ bao cấp.</li>
+                        <li>Thích ứng đa cấp độ giữa các thành phần kinh tế.</li>
+                        <li>Khích lệ sáng tạo qua phân phối lao động.</li>
+                    </ul>
+                </div>
+                <div class="card" style="background:#fff5f5; border-top: 5px solid #e53e3e;">
+                    <h4 style="color:#9b2c2c;">Hệ quả của mâu thuẫn</h4>
+                    <ul style="font-size: 15px;">
+                        <li>Kìm hãm công nghệ do pháp lý chưa theo kịp kinh tế số.</li>
+                        <li>Lãng phí nguồn lực tại một số khu vực DNNN hiệu quả thấp.</li>
+                        <li>Bất bình đẳng thực tế trong tiếp cận vốn và đất đai.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- PHẦN KẾT LUẬN BỔ SUNG CHO TRANG 15 -->
+            <div class="card highlight-blue" style="margin-top: 15px; padding: 12px 20px;">
+                <p style="margin:0; font-weight: 700; text-align: center; font-size: 17px;">
+                    <i class="fa-solid fa-lightbulb"></i> Kết luận: Cần tiếp tục hoàn thiện thể chế quản trị và hạ tầng pháp lý để xóa bỏ các "điểm nghẽn", tạo động lực mới cho LLSX bứt phá.
+                </p>
+            </div>
+        </div>
+        <div class="footer">Trang 15</div>
+    </div>
+
+    <!-- SLIDE 16: TIÊU ĐỀ RIÊNG 2.2.2 -->
+    <div class="slide section-break-slide">
+        <p>MỤC NHỎ</p>
+        <h2>2.2.2. Sự thay đổi của quan hệ sản xuất trong thời kỳ quá độ lên chủ nghĩa xã hội ở Việt Nam</h2>
+        <div class="divider"></div>
+    </div>
+
+    <!-- SLIDE 17: NỘI DUNG 2.2.2 (ĐÃ LÀM GIÀU KẾT QUẢ) -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="tag">MỤC 2.2.2</span>
+            <h2>Sự thay đổi trên 3 mặt của QHSX</h2>
+        </div>
+        <div class="content">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                <div class="card" style="border-top: 5px solid var(--primary);">
+                    <h4>Sở hữu</h4>
+                    <p style="font-size: 15px;">Đa hình thức (Toàn dân, Tư nhân, FDI). Phá vỡ thế độc quyền.</p>
+                </div>
+                <div class="card" style="border-top: 5px solid var(--primary);">
+                    <h4>Quản lý</h4>
+                    <p style="font-size: 15px;">Xóa bỏ bao cấp. Doanh nghiệp tự chủ. Đẩy mạnh <b>Chính phủ số</b>.</p>
+                </div>
+                <div class="card" style="border-top: 5px solid var(--primary);">
+                    <h4>Phân phối</h4>
+                    <p style="font-size: 15px;">Lấy kết quả lao động làm chủ đạo. Khắc phục tình trạng "cào bằng".</p>
+                </div>
+            </div>
+            <div class="highlight-blue card" style="margin-top: 15px; padding: 15px 25px;">
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Kết quả thực tiễn:</h4>
+                <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin: 0; padding-left: 20px;">
+                    <li style="font-size: 14px;">Huy động tối đa nguồn vốn và tri thức từ dân.</li>
+                    <li style="font-size: 14px;">Tạo lập môi trường cạnh tranh lành mạnh.</li>
+                    <li style="font-size: 14px;">Tối ưu hóa nguồn lực qua kinh tế số.</li>
+                    <li style="font-size: 14px;">Đảm bảo công bằng trong thụ hưởng thành quả.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer">Trang 17</div>
+    </div>
+
+    <!-- SLIDE 18: KẾT LUẬN -->
+    <div class="slide title-slide" style="background: var(--bg); color: var(--primary);">
+        <i class="fa-solid fa-quote-left" style="font-size: 60px; color: var(--secondary); margin-bottom: 20px;"></i>
+        <h2 style="font-size: 40px; margin-bottom: 30px;">TỔNG KẾT</h2>
+        <div style="max-width: 900px; margin: 0 auto; line-height: 1.8; font-size: 24px; font-weight: 600; text-align: center;">
+            "Sự biến đổi của LLSX và QHSX là quá trình lâu dài. Phát triển kinh tế tri thức và hoàn thiện thể chế KTTT định hướng XHCN là chìa khóa bứt phá."
+        </div>
+        <div style="margin-top: 60px;">
+            <p style="font-weight: 700; color: var(--primary);">XIN CẢM ƠN QUÝ THẦY CÔ VÀ CÁC BẠN!</p>
+        </div>
+    </div>
+
+</body>
+</html>
